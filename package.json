@@ -1,0 +1,23 @@
+{
+  "name": "taskflow",
+  "version": "1.0.0",
+  "description": "TaskFlow — Team Task Manager with role-based access control",
+  "main": "server/src/index.js",
+  "scripts": {
+    "start": "node server/src/index.js",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build": "cd client && npm install && npm run build",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "prisma:migrate": "cd server && npx prisma migrate dev",
+    "prisma:seed": "cd server && npx prisma db seed",
+    "prisma:studio": "cd server && npx prisma studio"
+  },
+  "keywords": ["task-manager", "project-management", "react", "express", "prisma"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
