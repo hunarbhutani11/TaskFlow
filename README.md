@@ -15,7 +15,7 @@
 - [x] 📱 **Fully Responsive** — Mobile-first with collapsible sidebar
 - [x] 🔍 **Search & Filters** — Filter tasks by status, priority, assignee
 - [x] 🛡️ **Security** — Helmet, CORS, rate limiting, bcrypt, Zod validation
-- [x] 🚀 **Railway Ready** — One-click deployment with Railway
+- [x] 🚀 **Vercel & Render Ready** — Optimized for split deployment
 
 ---
 
@@ -34,7 +34,7 @@
 | **Auth** | JWT (jsonwebtoken) + bcrypt |
 | **Security** | Helmet, CORS, express-rate-limit |
 | **Logging** | Morgan + custom logger |
-| **Deploy** | Railway |
+| **Deploy** | Vercel (Client) + Render (Server) |
 
 ---
 
@@ -75,18 +75,27 @@ The app will be available at `http://localhost:5173`
 
 ---
 
-## 🌐 Railway Deployment
+## 🌐 Deployment Setup (Vercel & Render)
 
-1. Push code to GitHub
-2. Connect Railway to your GitHub repo
-3. Add a PostgreSQL plugin in Railway
-4. Set environment variables:
-   - `DATABASE_URL` (from Railway PostgreSQL)
-   - `JWT_SECRET` (min 32 characters)
+### Backend (Render)
+1. Push your code to GitHub.
+2. Create a new Web Service on Render and connect your repo.
+3. Root directory: `server`
+4. Build command: `npm install && npx prisma generate`
+5. Start command: `node src/index.js`
+6. Add Environment Variables:
+   - `DATABASE_URL` (your Neon PostgreSQL URL)
+   - `JWT_SECRET`
    - `NODE_ENV=production`
-   - `CLIENT_URL=https://your-app.railway.app`
-5. Railway auto-detects `railway.json` for build/start commands
-6. Run `npx prisma migrate deploy` and `npx prisma db seed` via Railway CLI
+   - `CLIENT_URL=https://your-frontend.vercel.app` (Your Vercel URL without a trailing slash)
+
+### Frontend (Vercel)
+1. Create a new Project on Vercel and connect your repo.
+2. Framework Preset: `Vite`
+3. Root directory: `client`
+4. Build command: `npm run build`
+5. Add Environment Variables:
+   - `VITE_API_URL=https://your-backend.onrender.com/api` (Your Render URL ending in /api)
 
 ---
 
