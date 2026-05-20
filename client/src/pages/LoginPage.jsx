@@ -32,7 +32,8 @@ export default function LoginPage() {
       toast.success(`Welcome back, ${result.user.name}!`);
       navigate('/dashboard');
     } catch (err) {
-      toast.error(err.response?.data?.error || 'Login failed');
+      const errorMsg = err.response?.data?.error;
+      toast.error(typeof errorMsg === 'string' ? errorMsg : err.message || 'Login failed');
     } finally {
       setIsSubmitting(false);
     }

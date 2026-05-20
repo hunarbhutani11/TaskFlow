@@ -35,7 +35,8 @@ export default function SignupPage() {
       toast.success('Account created successfully!');
       navigate('/dashboard');
     } catch (err) {
-      toast.error(err.response?.data?.error || 'Signup failed');
+      const errorMsg = err.response?.data?.error;
+      toast.error(typeof errorMsg === 'string' ? errorMsg : err.message || 'Signup failed');
     } finally {
       setIsSubmitting(false);
     }
